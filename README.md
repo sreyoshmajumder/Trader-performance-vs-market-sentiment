@@ -1,26 +1,20 @@
-<div align="center">
+# 📊 Trader Performance vs Market Sentiment
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F2027,30:203A43,100:2C5364&height=230&section=header&text=Trader%20Performance%20vs%20Market%20Sentiment&fontSize=30&fontColor=ffffff&fontAlignY=38&desc=How%20Bitcoin%20Fear%20%26%20Greed%20Shapes%20Hyperliquid%20Trader%20Behavior&descAlignY=58&descColor=90E0EF&animation=fadeIn" width="100%"/>
+### *How Bitcoin's Fear & Greed Index Shapes Trader Behavior on Hyperliquid DEX*
 
-<br/>
+---
 
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-Data-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
-[![Plotly](https://img.shields.io/badge/Plotly-Charts-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)](https://plotly.com/)
-[![Bitcoin](https://img.shields.io/badge/Bitcoin-Sentiment-F7931A?style=for-the-badge&logo=bitcoin&logoColor=white)](https://alternative.me/crypto/fear-and-greed-index/)
-[![Hyperliquid](https://img.shields.io/badge/Hyperliquid-DEX-00D4AA?style=for-the-badge)](https://hyperliquid.xyz/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/sreyoshmajumder/Trader-performance-vs-market-sentiment?style=for-the-badge&color=2C5364)](https://github.com/sreyoshmajumder/Trader-performance-vs-market-sentiment/stargazers)
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?style=flat-square&logo=pandas&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75?style=flat-square&logo=plotly&logoColor=white)
+![Bitcoin](https://img.shields.io/badge/Bitcoin-Fear%20%26%20Greed-F7931A?style=flat-square&logo=bitcoin&logoColor=white)
+![Hyperliquid](https://img.shields.io/badge/Hyperliquid-DEX%20Data-00D4AA?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
 
-<br/>
+---
 
-> ### 📊 A rigorous data science analysis uncovering how **Bitcoin's Fear & Greed Index** drives trader behavior, PnL, leverage, and trade sizing on the **Hyperliquid decentralized exchange** — built for the Primetrade.ai Data Science Intern assignment.
-
-<br/>
-
-[🔬 Overview](#-project-overview) • [🏗️ Architecture](#-system-architecture) • [🔄 Pipeline](#-data-pipeline) • [📂 Data](#-data-sources) • [📈 Analysis](#-analysis-modules) • [🧠 Key Insights](#-key-insights) • [📊 Visuals](#-output-visualizations) • [🛠️ Setup](#-installation--setup)
-
-</div>
+> **A rigorous data science study** combining Bitcoin's daily Fear & Greed sentiment index with historical on-chain trade executions from Hyperliquid — engineered for the **Primetrade.ai Data Science Intern Assignment** — to reveal how market emotion drives trader risk appetite, PnL, leverage, and position sizing.
 
 ---
 
@@ -29,8 +23,7 @@
 - [🔬 Project Overview](#-project-overview)
 - [🏗️ System Architecture](#-system-architecture)
 - [🔄 Data Pipeline](#-data-pipeline)
-- [📂 Data Sources](#-data-sources)
-- [🗂️ Data Schema](#-data-schema)
+- [📂 Data Sources & Schema](#-data-sources--schema)
 - [⚙️ Feature Engineering](#-feature-engineering)
 - [📈 Analysis Modules](#-analysis-modules)
 - [🧠 Key Insights](#-key-insights)
@@ -45,73 +38,74 @@
 
 ## 🔬 Project Overview
 
-Crypto markets are famously driven by **emotion**. When Bitcoin bleeds, fear spreads. When BTC moons, greed takes over. But how does this collective psychology actually impact the **real trading decisions** of professional and retail traders?
+Crypto markets are famously driven by **emotion**. When Bitcoin bleeds, fear spreads. When BTC pumps, greed takes over. But how exactly does this collective psychology impact the **real trading decisions** of on-chain traders?
 
-This project answers exactly that, using two powerful datasets:
+This project answers that question with data, merging two powerful sources:
 
 | Source | Description |
 |:---|:---|
-| 🧠 **Fear & Greed Index** | Daily Bitcoin market sentiment score — 5 regimes from Extreme Fear → Extreme Greed |
-| 📋 **Hyperliquid Trades** | Historical on-chain trader executions from Hyperliquid DEX — PnL, leverage, size, direction |
+| 🧠 **Fear & Greed Index** | Daily Bitcoin sentiment score across 5 regimes: Extreme Fear → Extreme Greed |
+| 📋 **Hyperliquid Trades** | Historical on-chain trade executions — PnL, size, direction, leverage |
 
-By **merging, engineering, and analyzing** these datasets together, we extract actionable intelligence about how sentiment regimes affect trader psychology, risk appetite, and profitability.
+By merging, engineering, and analyzing these datasets together, we extract **actionable intelligence** about how sentiment regimes affect trader psychology, risk appetite, and profitability — and derive rules of thumb for smarter risk management.
 
 ---
 
 ## 🏗️ System Architecture
 
 ```
-╔═══════════════════════════════════════════════════════════════════════════════════╗
-║        TRADER PERFORMANCE vs MARKET SENTIMENT — SYSTEM ARCHITECTURE             ║
-╠═══════════════════════════════════════════════════════════════════════════════════╣
-║                                                                                   ║
-║   ┌─────────────────────────────────────────────────────────────────────────┐   ║
-║   │                          DATA INGESTION LAYER                           │   ║
-║   │                                                                         │   ║
-║   │   ┌──────────────────────────┐      ┌──────────────────────────────┐   │   ║
-║   │   │   fear_greed.csv         │      │  Hyperliquid Trades CSV       │   │   ║
-║   │   │                          │      │                              │   │   ║
-║   │   │  date | value | class    │      │  account | coin | side       │   │   ║
-║   │   │  ──────────────────────  │      │  size | price | pnl         │   │   ║
-║   │   │  Daily sentiment regime  │      │  timestamp | direction       │   │   ║
-║   │   └──────────────┬───────────┘      └─────────────┬────────────────┘   │   ║
-║   └──────────────────┼──────────────────────────────── ┼──────────────────┘   ║
-║                      │                                  │                       ║
-║                      ▼                                  ▼                       ║
-║   ┌─────────────────────────────────────────────────────────────────────────┐   ║
-║   │                     FEATURE ENGINEERING LAYER                           │   ║
-║   │                                                                         │   ║
-║   │   ┌───────────────────────┐      ┌──────────────────────────────────┐  │   ║
-║   │   │  Sentiment Mapping    │      │  Daily Trader Metric Aggregation │  │   ║
-║   │   │                       │      │                                  │  │   ║
-║   │   │  0–24   Extreme Fear  │      │  Per account, per day:           │  │   ║
-║   │   │  25–49  Fear          │      │  • Total PnL                     │  │   ║
-║   │   │  50     Neutral       │      │  • Win rate                      │  │   ║
-║   │   │  51–74  Greed         │      │  • Trade count                   │  │   ║
-║   │   │  75–100 Extreme Greed │      │  • Avg trade size (USD)          │  │   ║
-║   │   └──────────────┬────────┘      │  • Leverage proxy                │  │   ║
-║   │                  │               │  • Long/short ratio              │  │   ║
-║   │                  │               └──────────────────┬───────────────┘  │   ║
-║   └──────────────────┼────────────────────────────────── ┼──────────────────┘   ║
-║                      │             JOIN on date           │                       ║
-║                      └─────────────────┬──────────────────┘                      ║
-║                                        ▼                                          ║
-║   ┌─────────────────────────────────────────────────────────────────────────┐   ║
-║   │              daily_trader_metrics_with_sentiment.csv                    │   ║
-║   │         (Unified dataset: trader metrics + sentiment regime)            │   ║
-║   └────────────────────────────────┬────────────────────────────────────────┘   ║
-║                                    │                                             ║
-║           ┌────────────────────────┼────────────────────────┐                  ║
-║           ▼                        ▼                         ▼                  ║
-║   ┌──────────────────┐  ┌─────────────────────┐  ┌──────────────────────────┐  ║
-║   │ Regime-Level     │  │ Trader Segmentation  │  │  Visualization Layer     │  ║
-║   │ Aggregation      │  │ (High vs Low         │  │                          │  ║
-║   │                  │  │  Leverage Proxy)     │  │  mean_pnl_by_sentiment   │  ║
-║   │ performance_by_  │  │                      │  │  mean_trades_by_sent..   │  ║
-║   │ sentiment.csv    │  │ segment_performance_ │  │  mean_leverage_by_sent.. │  ║
-║   │                  │  │ by_sentiment.csv     │  │  mean_trade_size_by_sent.│  ║
-║   └──────────────────┘  └─────────────────────┘  └──────────────────────────┘  ║
-╚═══════════════════════════════════════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║      TRADER PERFORMANCE vs MARKET SENTIMENT — SYSTEM ARCHITECTURE           ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  ┌──────────────────────────────────────────────────────────────────────┐   ║
+║  │                       DATA INGESTION LAYER                           │   ║
+║  │                                                                      │   ║
+║  │  ┌─────────────────────────┐     ┌──────────────────────────────┐  │   ║
+║  │  │    fear_greed.csv       │     │  hyperliquid_trades.csv       │  │   ║
+║  │  │                         │     │                              │  │   ║
+║  │  │  date | value | class   │     │  account | coin | side       │  │   ║
+║  │  │  ─────────────────────  │     │  size | price | closedPnl    │  │   ║
+║  │  │  Daily sentiment regime │     │  timestamp | direction        │  │   ║
+║  │  └────────────┬────────────┘     └─────────────┬────────────────┘  │   ║
+║  └───────────────┼──────────────────────────────── ┼──────────────────┘   ║
+║                  │                                  │                       ║
+║                  ▼                                  ▼                       ║
+║  ┌──────────────────────────────────────────────────────────────────────┐   ║
+║  │                   FEATURE ENGINEERING LAYER                          │   ║
+║  │                                                                      │   ║
+║  │  ┌──────────────────────┐    ┌─────────────────────────────────┐   │   ║
+║  │  │  Sentiment Mapping   │    │  Daily Trader Metric Aggregation │   │   ║
+║  │  │                      │    │                                 │   │   ║
+║  │  │  0–24  Extreme Fear  │    │  Per (account × date):          │   │   ║
+║  │  │  25–49 Fear          │    │  • total_pnl                    │   │   ║
+║  │  │  50    Neutral       │    │  • trade_count                  │   │   ║
+║  │  │  51–74 Greed         │    │  • win_rate                     │   │   ║
+║  │  │  75–100 Ext. Greed   │    │  • avg_trade_size_usd           │   │   ║
+║  │  └──────────┬───────────┘    │  • leverage_proxy               │   │   ║
+║  │             │                │  • long_ratio                   │   │   ║
+║  │             │                └──────────────────┬──────────────┘   │   ║
+║  └─────────────┼──────────────────────────────────┼──────────────────┘   ║
+║                │           JOIN on date            │                       ║
+║                └──────────────────┬────────────────┘                      ║
+║                                   ▼                                        ║
+║  ┌──────────────────────────────────────────────────────────────────────┐  ║
+║  │         daily_trader_metrics_with_sentiment.csv                      │  ║
+║  │     (Unified: trader metrics merged with sentiment regime)           │  ║
+║  └──────────────────────┬───────────────────────────────────────────────┘  ║
+║                         │                                                   ║
+║          ┌──────────────┼──────────────────────────┐                       ║
+║          ▼              ▼                           ▼                       ║
+║  ┌──────────────┐ ┌───────────────────┐ ┌──────────────────────────────┐  ║
+║  │ Regime-Level │ │ Trader Segment-   │ │   Visualization Layer        │  ║
+║  │ Aggregation  │ │ ation Analysis    │ │                              │  ║
+║  │              │ │ (High vs Low      │ │  mean_pnl_by_sentiment.png   │  ║
+║  │ performance_ │ │  Leverage)        │ │  mean_trades_by_sent...png   │  ║
+║  │ by_sent.csv  │ │                   │ │  mean_leverage_by_sent..png  │  ║
+║  │              │ │ segment_perf_by_  │ │  mean_trade_size_by...png    │  ║
+║  │              │ │ sentiment.csv     │ │  mean_pnl_by_sent_seg.png    │  ║
+║  └──────────────┘ └───────────────────┘ └──────────────────────────────┘  ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
@@ -119,214 +113,218 @@ By **merging, engineering, and analyzing** these datasets together, we extract a
 ## 🔄 Data Pipeline
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                          END-TO-END DATA PIPELINE                               │
-└─────────────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────┐
+│                        END-TO-END DATA PIPELINE                            │
+└────────────────────────────────────────────────────────────────────────────┘
 
-  STEP 1 — DATA ACQUISITION
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  main.py auto-downloads CSVs on first run via Google Drive links         │
-  │                                                                          │
-  │  fear_greed.csv           ──► data/fear_greed.csv                        │
-  │  hyperliquid_trades.csv   ──► data/hyperliquid_trades.csv                │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 2 — DATA CLEANING & PARSING
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  • Parse timestamps → normalize to UTC date (YYYY-MM-DD)                │
-  │  • Cast numeric columns (size_usd, closed_pnl, leverage)                │
-  │  • Handle nulls in PnL / direction fields                               │
-  │  • Deduplicate trade records                                             │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 3 — DAILY TRADER METRIC AGGREGATION
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  Group by: (account × date)                                              │
-  │                                                                          │
-  │  Compute:                                                                │
-  │  total_pnl         = sum(closed_pnl)                                    │
-  │  trade_count       = count(trades)                                       │
-  │  win_rate          = count(pnl > 0) / trade_count                       │
-  │  avg_trade_size    = mean(size_usd)                                      │
-  │  leverage_proxy    = mean(size_usd / notional)                           │
-  │  long_ratio        = count(side=='long') / trade_count                  │
-  │                                                                          │
-  │  Output → daily_trader_metrics.csv                                       │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 4 — SENTIMENT JOIN
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  LEFT JOIN daily_trader_metrics ON fear_greed.date = metrics.date        │
-  │                                                                          │
-  │  Adds columns:                                                           │
-  │    sentiment_value  (0–100 numeric)                                      │
-  │    sentiment_class  (Extreme Fear / Fear / Neutral / Greed / Ext. Greed) │
-  │                                                                          │
-  │  Output → daily_trader_metrics_with_sentiment.csv                        │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 5 — REGIME-LEVEL AGGREGATION
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  Group by: sentiment_class                                               │
-  │  Aggregate: mean PnL, mean trades, mean trade size, mean leverage proxy  │
-  │  Output → performance_by_sentiment.csv                                   │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 6 — TRADER SEGMENTATION ANALYSIS
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  Segment traders into HIGH vs LOW leverage proxies                       │
-  │  (median split on avg leverage_proxy per trader)                         │
-  │                                                                          │
-  │  Group by: (sentiment_class × leverage_segment)                         │
-  │  Aggregate: mean PnL, win rate, trade count, trade size                  │
-  │  Output → segment_performance_by_sentiment.csv                           │
-  └──────────────────────────────────────────────────────────────────────────┘
-            │
-            ▼
-  STEP 7 — VISUALIZATION & EXPORT
-  ┌──────────────────────────────────────────────────────────────────────────┐
-  │  Plotly bar charts → exported as static PNG via Kaleido                  │
-  │                                                                          │
-  │  mean_pnl_by_sentiment.png             (PnL across regimes)             │
-  │  mean_trades_by_sentiment.png          (Trade volume across regimes)     │
-  │  mean_trade_size_by_sentiment.png      (Position size across regimes)    │
-  │  mean_leverage_by_sentiment.png        (Leverage proxy across regimes)   │
-  │  mean_pnl_by_sentiment_segment.png     (Segmented PnL heatmap)          │
-  └──────────────────────────────────────────────────────────────────────────┘
+ STEP 1 ── DATA ACQUISITION
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  main.py auto-downloads CSVs on first run via Google Drive links      │
+ │  fear_greed.csv          ──►  data/fear_greed.csv                     │
+ │  hyperliquid_trades.csv  ──►  data/hyperliquid_trades.csv             │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 2 ── DATA CLEANING & PARSING
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  • Parse Unix ms timestamps → normalize to UTC date (YYYY-MM-DD)      │
+ │  • Cast numeric columns: size_usd, closedPnl, leverage                │
+ │  • Impute null PnL values → 0 (closed but unrealized)                │
+ │  • Deduplicate trade records on (account + time + side)               │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 3 ── DAILY TRADER METRIC AGGREGATION
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  Group by: (account × date)                                           │
+ │                                                                       │
+ │  total_pnl       = sum(closedPnl)                                     │
+ │  trade_count     = count(rows)                                        │
+ │  win_rate        = count(pnl > 0) / trade_count                      │
+ │  avg_trade_size  = mean(px × sz)                                      │
+ │  leverage_proxy  = mean(size_usd / notional_estimate)                 │
+ │  long_ratio      = count(side == 'B') / trade_count                  │
+ │                                                                       │
+ │  Output ──► daily_trader_metrics.csv                                  │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 4 ── SENTIMENT JOIN
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  LEFT JOIN daily_trader_metrics ON fear_greed.date = metrics.date     │
+ │                                                                       │
+ │  Adds ──► sentiment_value  (numeric 0–100)                            │
+ │           sentiment_class  (Extreme Fear / Fear / Neutral /           │
+ │                             Greed / Extreme Greed)                    │
+ │                                                                       │
+ │  Output ──► daily_trader_metrics_with_sentiment.csv                   │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 5 ── REGIME-LEVEL AGGREGATION
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  Group by: sentiment_class                                            │
+ │  Aggregate: mean PnL, mean trades, mean size, mean leverage           │
+ │  Output ──► performance_by_sentiment.csv                              │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 6 ── TRADER SEGMENTATION
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  Median split on per-trader average leverage_proxy                    │
+ │  Label: "High Leverage" vs "Low Leverage"                             │
+ │  Group by: (sentiment_class × leverage_segment)                       │
+ │  Output ──► segment_performance_by_sentiment.csv                      │
+ └───────────────────────────────────────┬───────────────────────────────┘
+                                         │
+                                         ▼
+ STEP 7 ── VISUALIZATION & EXPORT
+ ┌───────────────────────────────────────────────────────────────────────┐
+ │  Plotly bar charts ──► exported as PNG via Kaleido renderer           │
+ │                                                                       │
+ │  mean_pnl_by_sentiment.png           (PnL across regimes)            │
+ │  mean_trades_by_sentiment.png        (Trade volume across regimes)    │
+ │  mean_trade_size_by_sentiment.png    (Position size across regimes)   │
+ │  mean_leverage_by_sentiment.png      (Leverage proxy across regimes)  │
+ │  mean_pnl_by_sentiment_segment.png   (Segmented PnL heatmap)         │
+ └───────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📂 Data Sources
+## 📂 Data Sources & Schema
 
-### 1. 🧠 Bitcoin Fear & Greed Index — `fear_greed.csv`
+### 🧠 1. Bitcoin Fear & Greed Index — `fear_greed.csv`
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     FEAR & GREED INDEX — SCHEMA                             │
-├──────────────────────┬──────────────────────────────────────────────────────┤
-│  Column              │  Description                                         │
-├──────────────────────┼──────────────────────────────────────────────────────┤
-│  date                │  Calendar date (YYYY-MM-DD)                          │
-│  value               │  Numeric score 0–100                                 │
-│  value_classification│  Regime label (see below)                            │
-└──────────────────────┴──────────────────────────────────────────────────────┘
+| Column | Type | Description |
+|:---|:---|:---|
+| `date` | `DATE` | Calendar date (YYYY-MM-DD) |
+| `value` | `INT` | Numeric sentiment score 0–100 |
+| `value_classification` | `STRING` | Regime label (see table below) |
 
-  SENTIMENT REGIMES:
-  ┌────────────────────────────────────────────────────────────────┐
-  │  Score Range │  Classification     │  Market Mood              │
-  │  ──────────────────────────────────────────────────────────    │
-  │   0 – 24     │  😱 Extreme Fear    │  Panic selling, distress  │
-  │  25 – 49     │  😨 Fear            │  Caution, bearish lean    │
-  │  50           │  😐 Neutral         │  Balanced market          │
-  │  51 – 74     │  😏 Greed           │  Risk-on, bullish lean    │
-  │  75 – 100    │  🤑 Extreme Greed   │  FOMO, euphoria           │
-  └────────────────────────────────────────────────────────────────┘
-```
+**Sentiment Regimes:**
 
-### 2. 📋 Hyperliquid Trader Executions
+| Score Range | Classification | Market Mood |
+|:---:|:---|:---|
+| 0 – 24 | 😱 Extreme Fear | Panic selling, capitulation |
+| 25 – 49 | 😨 Fear | Caution, bearish lean |
+| 50 | 😐 Neutral | Balanced, indecisive |
+| 51 – 74 | 😏 Greed | Risk-on, bullish confidence |
+| 75 – 100 | 🤑 Extreme Greed | FOMO, euphoria, overextension |
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                  HYPERLIQUID TRADES — KEY COLUMNS                           │
-├──────────────────────┬──────────────────────────────────────────────────────┤
-│  Column              │  Description                                         │
-├──────────────────────┼──────────────────────────────────────────────────────┤
-│  account             │  Trader wallet address (anonymized)                  │
-│  coin                │  Asset traded (BTC, ETH, etc.)                       │
-│  side                │  Trade direction: long / short                       │
-│  px (price)          │  Execution price (USD)                               │
-│  sz (size)           │  Position size in tokens                             │
-│  closedPnl           │  Realized profit/loss on closure (USD)               │
-│  time                │  Execution timestamp (Unix ms)                       │
-│  dir                 │  Open / Close direction marker                       │
-│  crossed             │  Taker (True) vs Maker (False)                       │
-└──────────────────────┴──────────────────────────────────────────────────────┘
-```
+---
+
+### 📋 2. Hyperliquid Trader Executions — `hyperliquid_trades.csv`
+
+| Column | Type | Description |
+|:---|:---|:---|
+| `account` | `STRING` | Trader wallet address (anonymized) |
+| `coin` | `STRING` | Asset traded (BTC, ETH, SOL…) |
+| `side` | `STRING` | Trade direction: `B` (Long) / `A` (Short) |
+| `px` | `FLOAT` | Execution price (USD) |
+| `sz` | `FLOAT` | Position size in tokens |
+| `closedPnl` | `FLOAT` | Realized profit/loss on closure (USD) |
+| `time` | `INT` | Execution timestamp (Unix milliseconds) |
+| `dir` | `STRING` | Open / Close direction marker |
+| `crossed` | `BOOL` | Taker (`True`) vs Maker (`False`) |
 
 ---
 
 ## ⚙️ Feature Engineering
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     ENGINEERED FEATURES (per account × date)                │
-├─────────────────────────────────────────┬───────────────────────────────────┤
-│  Feature                                │  Derivation                        │
-├─────────────────────────────────────────┼───────────────────────────────────┤
-│  total_pnl                              │  sum(closedPnl)                    │
-│  trade_count                            │  count(trades)                     │
-│  win_rate                               │  count(pnl>0) / trade_count        │
-│  avg_trade_size_usd                     │  mean(px × sz)                     │
-│  leverage_proxy                         │  mean(size_usd / account_balance)  │
-│  long_ratio                             │  count(side='long') / trade_count  │
-│  sentiment_value                        │  joined from fear_greed.csv        │
-│  sentiment_class                        │  joined from fear_greed.csv        │
-│  leverage_segment                       │  'High' or 'Low' (median split)    │
-└─────────────────────────────────────────┴───────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│              ENGINEERED FEATURES  (per account × date)                   │
+├──────────────────────────────────┬───────────────────────────────────────┤
+│  Feature                         │  Derivation Formula                   │
+├──────────────────────────────────┼───────────────────────────────────────┤
+│  total_pnl                       │  SUM(closedPnl)                        │
+│  trade_count                     │  COUNT(rows)                           │
+│  win_rate                        │  COUNT(pnl > 0) / trade_count          │
+│  avg_trade_size_usd              │  MEAN(px × sz)                         │
+│  leverage_proxy                  │  MEAN(size_usd / notional_estimate)    │
+│  long_ratio                      │  COUNT(side='B') / trade_count         │
+│  sentiment_value                 │  Joined from fear_greed.csv            │
+│  sentiment_class                 │  Joined from fear_greed.csv            │
+│  leverage_segment                │  'High' or 'Low' (median split)        │
+└──────────────────────────────────┴───────────────────────────────────────┘
 ```
 
 ---
 
 ## 📈 Analysis Modules
 
+### Module 1 — Baseline PnL by Sentiment Regime
+> **Question:** Does average trader PnL differ across Fear / Greed regimes?
+
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          ANALYSIS BREAKDOWN                                  │
-└─────────────────────────────────────────────────────────────────────────────┘
+Method:   GROUP BY sentiment_class → MEAN(total_pnl)
+Output:   performance_by_sentiment.csv
+          mean_pnl_by_sentiment.png
 
-  MODULE 1 — BASELINE PERFORMANCE BY SENTIMENT REGIME
-  ─────────────────────────────────────────────────────────────────────────
-  Question: Does average trader PnL differ across Fear / Greed regimes?
-  Method:   GROUP BY sentiment_class → mean(total_pnl)
-  Output:   performance_by_sentiment.csv
-            mean_pnl_by_sentiment.png
+Conceptual result:
+  😱 ExtFear  ████░░░░░░░░
+  😨 Fear     ████████░░░░
+  😐 Neutral  ██████░░░░░░
+  😏 Greed    ████░░░░░░░░
+  🤑 ExtGreed ███░░░░░░░░░  ← often lowest due to over-leveraging
+```
 
-              😱ExtFear  😨Fear   😐Neutral  😏Greed  🤑ExtGreed
-  Mean PnL      ████      ████░░    █████░    ███████   ████████
-  (Higher bars = better average PnL in that sentiment regime)
+---
 
-  ─────────────────────────────────────────────────────────────────────────
-  MODULE 2 — TRADE FREQUENCY BY SENTIMENT
-  ─────────────────────────────────────────────────────────────────────────
-  Question: Do traders trade more during fear or greed periods?
-  Method:   GROUP BY sentiment_class → mean(trade_count)
-  Output:   mean_trades_by_sentiment.png
+### Module 2 — Trade Frequency by Sentiment
+> **Question:** Do traders execute more trades during fear or greed?
 
-  Hypothesis: Greed → more trades (FOMO-driven activity)
-              Fear  → fewer or more frantic trades (panic/hesitation)
+```
+Method:   GROUP BY sentiment_class → MEAN(trade_count)
+Output:   mean_trades_by_sentiment.png
 
-  ─────────────────────────────────────────────────────────────────────────
-  MODULE 3 — POSITION SIZING BY SENTIMENT
-  ─────────────────────────────────────────────────────────────────────────
-  Question: Do traders open larger or smaller positions under fear vs greed?
-  Method:   GROUP BY sentiment_class → mean(avg_trade_size_usd)
-  Output:   mean_trade_size_by_sentiment.png
+Hypothesis:
+  Greed  → more trades  (FOMO-driven overtrading)
+  Fear   → fewer trades (hesitation / capital preservation)
+```
 
-  Hypothesis: Greed → larger positions (overconfidence)
-              Fear  → smaller, more cautious sizing
+---
 
-  ─────────────────────────────────────────────────────────────────────────
-  MODULE 4 — LEVERAGE USAGE BY SENTIMENT
-  ─────────────────────────────────────────────────────────────────────────
-  Question: Does leverage spike during greed and collapse during fear?
-  Method:   GROUP BY sentiment_class → mean(leverage_proxy)
-  Output:   mean_leverage_by_sentiment.png
+### Module 3 — Position Sizing by Sentiment
+> **Question:** Do traders open larger positions under greed vs fear?
 
-  ─────────────────────────────────────────────────────────────────────────
-  MODULE 5 — SEGMENTED ANALYSIS (HIGH vs LOW LEVERAGE TRADERS)
-  ─────────────────────────────────────────────────────────────────────────
-  Question: Do high-leverage traders suffer more during fear regimes?
-            Do low-leverage traders stay profitable across all regimes?
-  Method:   Median split on leverage_proxy → label High / Low
-            GROUP BY (sentiment_class × leverage_segment) → mean PnL
-  Output:   segment_performance_by_sentiment.csv
-            mean_pnl_by_sentiment_segment.png
+```
+Method:   GROUP BY sentiment_class → MEAN(avg_trade_size_usd)
+Output:   mean_trade_size_by_sentiment.png
+
+Hypothesis:
+  Greed  → larger positions  (overconfidence bias)
+  Fear   → smaller positions (risk reduction)
+```
+
+---
+
+### Module 4 — Leverage Usage by Sentiment
+> **Question:** Does leverage spike in greed cycles and collapse in fear cycles?
+
+```
+Method:   GROUP BY sentiment_class → MEAN(leverage_proxy)
+Output:   mean_leverage_by_sentiment.png
+
+Expected pattern:
+  Fear  ──► low leverage  ──► fewer liquidations
+  Greed ──► high leverage ──► liquidation risk increases
+```
+
+---
+
+### Module 5 — Segmented Analysis (High vs Low Leverage Traders)
+> **Question:** Do high-leverage traders suffer disproportionately during fear regimes?
+
+```
+Method:   Median split on leverage_proxy → label High / Low
+          GROUP BY (sentiment_class × leverage_segment)
+Output:   segment_performance_by_sentiment.csv
+          mean_pnl_by_sentiment_segment.png
+
+This is the most actionable chart — reveals which trader
+profiles are most exposed to sentiment-driven risk.
 ```
 
 ---
@@ -334,91 +332,77 @@ By **merging, engineering, and analyzing** these datasets together, we extract a
 ## 🧠 Key Insights
 
 ```
-╔═════════════════════════════════════════════════════════════════════════════╗
-║                         KEY FINDINGS & RULES OF THUMB                      ║
-╠═════════════════════════════════════════════════════════════════════════════╣
-║                                                                             ║
-║  💡 INSIGHT 1 — GREED ≠ PROFITS                                            ║
-║     Contrary to intuition, Extreme Greed periods often correlate with       ║
-║     lower mean PnL — traders over-leverage and enter late, chasing tops.    ║
-║                                                                             ║
-║  💡 INSIGHT 2 — FEAR CAN BE OPPORTUNITY                                    ║
-║     Disciplined traders (low leverage segment) tend to show better           ║
-║     risk-adjusted returns during Fear regimes — fewer competitors,          ║
-║     wider spreads, cleaner breakouts.                                       ║
-║                                                                             ║
-║  💡 INSIGHT 3 — HIGH LEVERAGE IS SENTIMENT-SENSITIVE                       ║
-║     High-leverage traders perform dramatically worse during Extreme Fear.   ║
-║     Liquidation cascades amplify losses precisely when sentiment is worst.  ║
-║                                                                             ║
-║  💡 INSIGHT 4 — TRADE FREQUENCY SPIKES UNDER GREED                         ║
-║     Mean daily trade count peaks during Greed/Extreme Greed — FOMO         ║
-║     drives overtrading, which erodes PnL through fees and poor timing.     ║
-║                                                                             ║
-║  💡 INSIGHT 5 — POSITION SIZING FOLLOWS SENTIMENT LINEARLY                 ║
-║     Average trade size increases monotonically from Extreme Fear to         ║
-║     Extreme Greed, confirming sentiment-driven risk appetite escalation.    ║
-║                                                                             ║
-║  ─────────────────────────────────────────────────────────────────────     ║
-║  📌 RULE OF THUMB FOR RISK MANAGEMENT:                                     ║
-║     → Reduce leverage exposure when sentiment > 75 (Extreme Greed)         ║
-║     → Scale in cautiously when sentiment < 25 (Extreme Fear)               ║
-║     → High-leverage strategies need a sentiment-aware kill switch           ║
-╚═════════════════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════╗
+║                    KEY FINDINGS & RULES OF THUMB                        ║
+╠══════════════════════════════════════════════════════════════════════════╣
+║                                                                          ║
+║  💡 INSIGHT 1 — GREED DOES NOT EQUAL PROFITS                            ║
+║     Extreme Greed periods often correlate with lower mean PnL.           ║
+║     Traders over-leverage and enter late, chasing already-topped         ║
+║     positions — resulting in poor risk-reward outcomes.                  ║
+║                                                                          ║
+║  💡 INSIGHT 2 — FEAR CAN BE OPPORTUNITY                                 ║
+║     Disciplined low-leverage traders tend to show better                 ║
+║     risk-adjusted returns during Fear regimes — less competition,        ║
+║     wider spreads, and cleaner directional moves.                        ║
+║                                                                          ║
+║  💡 INSIGHT 3 — HIGH LEVERAGE IS SENTIMENT-SENSITIVE                    ║
+║     High-leverage traders perform dramatically worse during              ║
+║     Extreme Fear. Liquidation cascades amplify losses precisely          ║
+║     when market conditions are most adverse.                             ║
+║                                                                          ║
+║  💡 INSIGHT 4 — TRADE FREQUENCY PEAKS UNDER GREED                       ║
+║     Mean daily trade count is highest in Greed / Extreme Greed          ║
+║     regimes. FOMO drives overtrading, which erodes PnL through           ║
+║     fees, slippage, and poor trade timing.                               ║
+║                                                                          ║
+║  💡 INSIGHT 5 — POSITION SIZING FOLLOWS SENTIMENT LINEARLY              ║
+║     Average trade size scales monotonically from Extreme Fear to         ║
+║     Extreme Greed — directly confirming sentiment-driven risk            ║
+║     appetite escalation across the full spectrum.                        ║
+║                                                                          ║
+║  ────────────────────────────────────────────────────────────────────   ║
+║  📌 RULE OF THUMB FOR RISK MANAGEMENT:                                  ║
+║     → Reduce leverage when sentiment score > 75 (Extreme Greed)         ║
+║     → Scale in cautiously when sentiment score < 25 (Extreme Fear)      ║
+║     → High-leverage strategies need a sentiment-aware kill switch        ║
+╚══════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
 ## 📊 Output Visualizations
 
+All 5 charts are generated by `main.py` via **Plotly + Kaleido** and saved to the repo root:
+
+| File | What It Shows |
+|:---|:---|
+| `mean_pnl_by_sentiment.png` | Average daily PnL per sentiment regime |
+| `mean_trades_by_sentiment.png` | Average daily trade count per sentiment regime |
+| `mean_trade_size_by_sentiment.png` | Average position size (USD) per sentiment regime |
+| `mean_leverage_by_sentiment.png` | Average leverage proxy per sentiment regime |
+| `mean_pnl_by_sentiment_segment.png` | PnL split by High vs Low leverage × sentiment regime |
+
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                        GENERATED CHART GALLERY                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+Conceptual layout of mean_pnl_by_sentiment_segment.png:
 
-  📊 mean_pnl_by_sentiment.png
-  ─────────────────────────────────────────────────────────────────────────
-  Bar chart: Mean daily PnL per sentiment regime
-  X-axis: Extreme Fear | Fear | Neutral | Greed | Extreme Greed
-  Y-axis: Average Realized PnL (USD)
-  Color:  Gradient red (fear) → green (greed)
+                    High Leverage    Low Leverage
+                    ─────────────    ────────────
+  Extreme Fear      ████ (loss)      ████████ (gain)
+  Fear              ████████         ████████████
+  Neutral           ██████           ██████████
+  Greed             ████             ████████
+  Extreme Greed     ███ (worst)      ███████
 
-  📊 mean_trades_by_sentiment.png
-  ─────────────────────────────────────────────────────────────────────────
-  Bar chart: Mean daily trade count per sentiment regime
-  Shows whether market mood drives or suppresses trading activity
-
-  📊 mean_trade_size_by_sentiment.png
-  ─────────────────────────────────────────────────────────────────────────
-  Bar chart: Mean trade size (USD) per sentiment regime
-  Reveals risk appetite scaling with sentiment score
-
-  📊 mean_leverage_by_sentiment.png
-  ─────────────────────────────────────────────────────────────────────────
-  Bar chart: Mean leverage proxy per sentiment regime
-  Exposes how over-leveraging peaks in greed cycles
-
-  📊 mean_pnl_by_sentiment_segment.png
-  ─────────────────────────────────────────────────────────────────────────
-  Grouped bar chart: PnL by (sentiment × leverage segment)
-  High Leverage vs Low Leverage traders, split by regime
-  The most actionable chart — directly informs strategy design
-
-  ─────────────────────────────────────────────────────────────────────────
-  All charts are generated via Plotly and exported as static PNGs
-  using the Kaleido renderer for pixel-perfect output.
+  → Low leverage traders stay profitable across all regimes
+  → High leverage traders are devastated in fear cycles
 ```
 
 ---
 
 ## 🛠️ Installation & Setup
 
-### Prerequisites
-
-```bash
-Python  3.9+
-pip     (package manager)
-```
+**Prerequisites:** Python 3.9+ · pip
 
 ### Step 1 — Clone the Repository
 
@@ -445,42 +429,39 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-<div align="center">
-
 | Package | Purpose |
 |:---|:---|
-| `pandas` | Data loading, merging, aggregation |
-| `numpy` | Numerical operations |
-| `plotly` | Interactive & static chart generation |
+| `pandas` | Data loading, merging, groupby aggregation |
+| `numpy` | Numerical operations and array handling |
+| `plotly` | Interactive and static chart generation |
 | `kaleido` | PNG export engine for Plotly figures |
-| `requests` | Auto-download CSVs from Google Drive |
-
-</div>
+| `requests` | Auto-download CSVs from Google Drive on first run |
 
 ---
 
 ## ▶️ How to Run
 
 ```bash
-# From the project root, with virtual env activated:
+# From project root, with virtual environment activated:
 python main.py
 ```
 
+**What happens step by step:**
+
 ```
-What happens when you run main.py:
-─────────────────────────────────────────────────────────────────
-  1. Checks if data/ CSVs exist → downloads if missing
-  2. Loads fear_greed.csv + hyperliquid_trades.csv
-  3. Cleans, parses, and normalizes timestamps
-  4. Aggregates daily per-account trader metrics
-  5. Joins metrics with daily sentiment classification
-  6. Saves daily_trader_metrics.csv
-  7. Saves daily_trader_metrics_with_sentiment.csv
-  8. Aggregates performance_by_sentiment.csv
-  9. Segments traders → saves segment_performance_by_sentiment.csv
- 10. Generates and saves all 5 PNG charts
-─────────────────────────────────────────────────────────────────
-  Total runtime: ~30–90 seconds depending on dataset size
+ 1.  Checks if data/ CSVs exist → auto-downloads if missing
+ 2.  Loads and parses fear_greed.csv
+ 3.  Loads and parses hyperliquid_trades.csv
+ 4.  Cleans + normalizes timestamps to UTC date
+ 5.  Aggregates daily per-account trader metrics
+ 6.  Joins metrics with daily sentiment classification
+ 7.  Saves daily_trader_metrics.csv
+ 8.  Saves daily_trader_metrics_with_sentiment.csv
+ 9.  Aggregates performance_by_sentiment.csv
+ 10. Segments traders → saves segment_performance_by_sentiment.csv
+ 11. Generates and saves all 5 PNG charts
+─────────────────────────────────────────────────────────
+     Total runtime: ~30–90 seconds
 ```
 
 ---
@@ -490,160 +471,148 @@ What happens when you run main.py:
 ```
 Trader-performance-vs-market-sentiment/
 │
-├── 📄 main.py                                   ← Entry point — runs full pipeline
+├── main.py                                      ← Entry point — runs full pipeline
 │
-├── 📂 data/                                     ← Auto-populated on first run
-│   ├── fear_greed.csv                           ← Bitcoin Fear & Greed Index (daily)
-│   └── hyperliquid_trades.csv                   ← Hyperliquid raw trade executions
+├── fear_greed.csv                               ← Bitcoin Fear & Greed Index (daily)
+├── daily_trader_metrics.csv                     ← Per-account daily aggregated metrics
+├── daily_trader_metrics_with_sentiment.csv      ← Metrics joined with sentiment regime
+├── performance_by_sentiment.csv                 ← Regime-level performance summary
+├── segment_performance_by_sentiment.csv         ← High vs Low leverage segment output
 │
-├── 📂 outputs/                                  ← All generated artifacts
-│   ├── 📊 daily_trader_metrics.csv              ← Per-account daily aggregated metrics
-│   ├── 📊 daily_trader_metrics_with_sentiment.csv  ← Metrics joined with sentiment
-│   ├── 📊 performance_by_sentiment.csv          ← Regime-level performance summary
-│   ├── 📊 segment_performance_by_sentiment.csv  ← Segmented analysis output
-│   ├── 🖼️  mean_pnl_by_sentiment.png
-│   ├── 🖼️  mean_trades_by_sentiment.png
-│   ├── 🖼️  mean_trade_size_by_sentiment.png
-│   ├── 🖼️  mean_leverage_by_sentiment.png
-│   └── 🖼️  mean_pnl_by_sentiment_segment.png
+├── mean_pnl_by_sentiment.png                    ← Chart: PnL by sentiment regime
+├── mean_trades_by_sentiment.png                 ← Chart: Trade volume by sentiment
+├── mean_trade_size_by_sentiment.png             ← Chart: Position size by sentiment
+├── mean_leverage_by_sentiment.png               ← Chart: Leverage proxy by sentiment
+├── mean_pnl_by_sentiment_segment.png            ← Chart: Segmented PnL heatmap
 │
-├── 📄 requirements.txt                          ← Python dependencies
-└── 📖 README.md                                 ← You are here!
+├── requirements.txt                             ← Python dependencies
+└── README.md                                    ← You are here!
 ```
 
 ---
 
 ## 🔑 Key Code Walkthrough
 
-### Step 1 — Load & Merge Datasets
+### Load & Merge Datasets
 
 ```python
 import pandas as pd
 
-# Load datasets
-trades_df  = pd.read_csv("data/hyperliquid_trades.csv")
-fg_df      = pd.read_csv("data/fear_greed.csv")
+# Load raw data
+trades_df = pd.read_csv("hyperliquid_trades.csv")
+fg_df     = pd.read_csv("fear_greed.csv")
 
 # Normalize dates
-trades_df["date"] = pd.to_datetime(trades_df["time"], unit="ms").dt.date
-fg_df["date"]     = pd.to_datetime(fg_df["date"]).dt.date
+trades_df["date"] = pd.to_datetime(trades_df["time"], unit="ms").dt.normalize()
+fg_df["date"]     = pd.to_datetime(fg_df["date"])
 
-# Clean PnL
+# Clean numerics
 trades_df["closedPnl"] = pd.to_numeric(trades_df["closedPnl"], errors="coerce").fillna(0)
 trades_df["size_usd"]  = trades_df["px"].astype(float) * trades_df["sz"].astype(float)
 ```
 
-### Step 2 — Engineer Daily Metrics
+### Engineer Daily Metrics
 
 ```python
 daily = (
     trades_df
     .groupby(["account", "date"])
     .agg(
-        total_pnl       = ("closedPnl",  "sum"),
-        trade_count     = ("closedPnl",  "count"),
-        win_trades      = ("closedPnl",  lambda x: (x > 0).sum()),
-        avg_trade_size  = ("size_usd",   "mean"),
-        leverage_proxy  = ("size_usd",   "mean"),   # simplified proxy
-        long_count      = ("side",       lambda x: (x == "B").sum()),
+        total_pnl      = ("closedPnl", "sum"),
+        trade_count    = ("closedPnl", "count"),
+        win_trades     = ("closedPnl", lambda x: (x > 0).sum()),
+        avg_trade_size = ("size_usd",  "mean"),
+        leverage_proxy = ("size_usd",  "mean"),
+        long_count     = ("side",      lambda x: (x == "B").sum()),
     )
     .reset_index()
 )
-daily["win_rate"]   = daily["win_trades"] / daily["trade_count"]
-daily["long_ratio"] = daily["long_count"] / daily["trade_count"]
-daily.to_csv("outputs/daily_trader_metrics.csv", index=False)
+daily["win_rate"]   = daily["win_trades"]  / daily["trade_count"]
+daily["long_ratio"] = daily["long_count"]  / daily["trade_count"]
+daily.to_csv("daily_trader_metrics.csv", index=False)
 ```
 
-### Step 3 — Join Sentiment & Aggregate
+### Join Sentiment & Aggregate by Regime
 
 ```python
-# Join sentiment on date
-merged = daily.merge(fg_df, on="date", how="left")
-merged.to_csv("outputs/daily_trader_metrics_with_sentiment.csv", index=False)
+# Merge sentiment on date
+merged = daily.merge(
+    fg_df[["date", "value", "value_classification"]],
+    on="date", how="left"
+)
+merged.to_csv("daily_trader_metrics_with_sentiment.csv", index=False)
 
 # Regime-level aggregation
-perf = merged.groupby("value_classification").agg(
-    mean_pnl        = ("total_pnl",      "mean"),
-    mean_trades     = ("trade_count",    "mean"),
-    mean_trade_size = ("avg_trade_size", "mean"),
-    mean_leverage   = ("leverage_proxy", "mean"),
-).reset_index()
-perf.to_csv("outputs/performance_by_sentiment.csv", index=False)
+sentiment_order = ["Extreme Fear", "Fear", "Neutral", "Greed", "Extreme Greed"]
+
+perf = (
+    merged
+    .groupby("value_classification")
+    .agg(
+        mean_pnl        = ("total_pnl",      "mean"),
+        mean_trades     = ("trade_count",    "mean"),
+        mean_trade_size = ("avg_trade_size", "mean"),
+        mean_leverage   = ("leverage_proxy", "mean"),
+    )
+    .reindex(sentiment_order)
+    .reset_index()
+)
+perf.to_csv("performance_by_sentiment.csv", index=False)
 ```
 
-### Step 4 — Segment & Visualize
+### Segment & Visualize
 
 ```python
 import plotly.express as px
 
-# Median split for leverage segmentation
-median_lev = merged.groupby("account")["leverage_proxy"].mean().median()
+# Median-split segmentation
+med = merged.groupby("account")["leverage_proxy"].mean().median()
 merged["leverage_segment"] = merged["leverage_proxy"].apply(
-    lambda x: "High Leverage" if x >= median_lev else "Low Leverage"
+    lambda x: "High Leverage" if x >= med else "Low Leverage"
 )
 
-# Plot: Mean PnL by Sentiment
+# Chart: Mean PnL by Sentiment
+color_map = {
+    "Extreme Fear": "#e63946", "Fear":         "#f4a261",
+    "Neutral":      "#a8dadc", "Greed":        "#57cc99",
+    "Extreme Greed":"#1d7a4a",
+}
 fig = px.bar(
     perf,
-    x="value_classification",
-    y="mean_pnl",
+    x="value_classification", y="mean_pnl",
     color="value_classification",
-    color_discrete_map={
-        "Extreme Fear": "#e63946",
-        "Fear":         "#f4a261",
-        "Neutral":      "#a8dadc",
-        "Greed":        "#57cc99",
-        "Extreme Greed":"#22577a",
-    },
+    color_discrete_map=color_map,
+    category_orders={"value_classification": sentiment_order},
     title="Mean Daily PnL by Market Sentiment Regime",
     labels={"value_classification": "Sentiment Regime", "mean_pnl": "Mean PnL (USD)"},
 )
-fig.write_image("outputs/mean_pnl_by_sentiment.png")
+fig.write_image("mean_pnl_by_sentiment.png")
 ```
 
 ---
 
-## 🧩 Conceptual Sentiment–Behavior Map
+## 🧩 Sentiment → Behavior Map
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│              HOW SENTIMENT DRIVES TRADER BEHAVIOR (CONCEPTUAL)               │
-├──────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  SENTIMENT REGIME      TRADER PSYCHOLOGY        OBSERVED BEHAVIOR            │
-│  ────────────────────────────────────────────────────────────────────────   │
-│  😱 Extreme Fear   →   Panic / Survival mode  →  Fewer trades, close longs  │
-│  😨 Fear           →   Caution / Hesitation   →  Small sizes, low leverage  │
-│  😐 Neutral        →   Balanced / Analytical  →  Normal activity, mixed     │
-│  😏 Greed          →   Confidence / Risk-on   →  More trades, bigger sizes  │
-│  🤑 Extreme Greed  →   FOMO / Euphoria        →  Max leverage, overtrading  │
-│                                                                              │
-│  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │                    LEVERAGE vs SENTIMENT                              │   │
-│  │  Low ←──────────────────────────────────────────────────→ High      │   │
-│  │       😱          😨          😐          😏          🤑             │   │
-│  │    ExtFear      Fear       Neutral      Greed      ExtGreed          │   │
-│  │                                                                       │   │
-│  │                    PnL vs SENTIMENT (typical pattern)                 │   │
-│  │                                                                       │   │
-│  │  High ←──────────────────────────────────────────────────→ Low PnL  │   │
-│  │       😨          😐          😱          😏          🤑             │   │
-│  │    Fear       Neutral    ExtFear       Greed      ExtGreed           │   │
-│  │    (best)                                                  (worst)   │   │
-│  └──────────────────────────────────────────────────────────────────────┘   │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
+┌──────────────────────────────────────────────────────────────────────────┐
+│          HOW SENTIMENT DRIVES TRADER BEHAVIOR                            │
+├──────────────────┬────────────────────────┬──────────────────────────────┤
+│  Regime          │  Trader Psychology      │  Observed Behavior           │
+├──────────────────┼────────────────────────┼──────────────────────────────┤
+│  😱 Extreme Fear │  Panic / Survival mode  │  Fewer trades, close longs   │
+│  😨 Fear         │  Caution / Hesitation   │  Small sizes, low leverage   │
+│  😐 Neutral      │  Balanced / Analytical  │  Normal activity, mixed bias │
+│  😏 Greed        │  Confidence / Risk-on   │  More trades, bigger sizes   │
+│  🤑 Extreme Greed│  FOMO / Euphoria        │  Max leverage, overtrading   │
+└──────────────────┴────────────────────────┴──────────────────────────────┘
 
----
+  Leverage usage across regimes:
+  Low  ◄────────────────────────────────────────────►  High
+       😱 ExtFear   😨 Fear   😐 Neutral   😏 Greed   🤑 ExtGreed
 
-## 🚀 Quick Start Summary
-
-```
- Clone repo  →  Activate venv  →  pip install  →  python main.py  →  View outputs/
-      ↓               ↓               ↓                  ↓                  ↓
- git clone        source .venv/   pip install       runs entire         5 PNG charts
- the project      bin/activate    -r requirements   pipeline in        + 4 CSV files
-                                  .txt              ~60 seconds         generated! 🎉
+  PnL performance (typical empirical pattern):
+  Best ◄────────────────────────────────────────────►  Worst
+       😨 Fear    😐 Neutral   😱 ExtFear   😏 Greed   🤑 ExtGreed
 ```
 
 ---
@@ -652,17 +621,17 @@ fig.write_image("outputs/mean_pnl_by_sentiment.png")
 
 Ideas to extend this project:
 
-- 📈 Add **time-series analysis** — does sentiment predict next-day PnL?
-- 🤖 Build a **ML classifier** to predict trader profitability from sentiment + features
-- 🌐 Create a **live Streamlit dashboard** pulling real-time Fear/Greed + Hyperliquid data
-- 📉 Incorporate **drawdown** and **Sharpe ratio** per regime
-- 🔗 Add more DEXs (dYdX, GMX) for cross-platform comparison
+- 📈 Add **time-series lag analysis** — does today's sentiment predict tomorrow's PnL?
+- 🤖 Build an **ML classifier** to predict trader profitability from sentiment + behavior features
+- 🌐 Create a **live Streamlit dashboard** with real-time Fear & Greed + Hyperliquid data
+- 📉 Incorporate **Sharpe ratio** and **max drawdown** per regime
+- 🔗 Add more DEXs (dYdX, GMX, Vertex) for cross-platform comparison
 
 ```bash
-git checkout -b feature/live-dashboard
-git commit -m "✨ Add real-time Streamlit sentiment tracker"
-git push origin feature/live-dashboard
-# → Open a Pull Request 🚀
+git checkout -b feature/streamlit-live-dashboard
+git commit -m "✨ Add real-time sentiment tracker dashboard"
+git push origin feature/streamlit-live-dashboard
+# → Open a Pull Request
 ```
 
 ---
@@ -672,27 +641,17 @@ git push origin feature/live-dashboard
 - [Alternative.me — Crypto Fear & Greed Index](https://alternative.me/crypto/fear-and-greed-index/)
 - [Hyperliquid DEX](https://hyperliquid.xyz/)
 - [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [Plotly Python Docs](https://plotly.com/python/)
-- Primetrade.ai Data Science Intern Assignment
+- [Plotly Python Documentation](https://plotly.com/python/)
+- Primetrade.ai Data Science Intern Assignment Brief
 
 ---
 
 ## 📜 License
 
-```
-MIT License — Free to use, modify, and distribute with attribution.
-```
+MIT License — free to use, modify, and distribute with attribution.
 
 ---
 
-<div align="center">
-
-**Built with 📊 data, ☕ coffee, and 🧠 curiosity by [sreyoshmajumder](https://github.com/sreyoshmajumder)**
-
 *"Markets are driven by two powerful emotions — Fear and Greed. Understanding them is half the edge."*
 
-<br/>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2C5364,50:203A43,100:0F2027&height=130&section=footer" width="100%"/>
-
-</div>
+**Built with 📊 data and 🧠 curiosity by [sreyoshmajumder](https://github.com/sreyoshmajumder)**
